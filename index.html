@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelvo The Plug — Tampa Sneaker Shop</title>
+<meta name="description" content="Kelvo The Plug — sneakers, heat, and verified pairs in Tampa, Florida.">
+<style>
+:root{--bg:#070707;--panel:#111;--text:#f7f7f2;--muted:#a5a5a0;--acid:#d8ff3e;--line:#2b2b2b;--radius:24px;--shadow:0 24px 80px rgba(0,0,0,.34)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 8%,color-mix(in srgb,var(--acid) 9%,transparent),transparent 24%),var(--bg);color:var(--text)}a{color:inherit;text-decoration:none}button,input,select{font:inherit}
+.announcement{background:var(--acid);color:#0b0b0b;text-align:center;padding:8px 16px;font-size:12px;font-weight:900;letter-spacing:.14em}
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 5vw;background:rgba(7,7,7,.84);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:var(--acid);color:#0a0a0a;display:grid;place-items:center;font-weight:1000;font-size:22px;transform:rotate(-6deg)}.brand-copy strong{display:block;letter-spacing:.04em}.brand-copy span{display:block;color:var(--muted);font-size:10px;margin-top:2px;letter-spacing:.16em}
+nav{display:flex;gap:28px;font-size:13px;font-weight:800;color:#d8d8d4}nav a:hover{color:var(--acid)}.header-cta{display:flex;gap:10px}
+.btn{border:1px solid var(--line);border-radius:999px;padding:12px 18px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;cursor:pointer}.btn:hover{transform:translateY(-2px)}.btn.acid{background:var(--acid);color:#0a0a0a;border-color:var(--acid)}.btn.dark{background:#141414;color:#fff}.btn.ghost{background:transparent;color:#fff}
+.hero{min-height:84vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:6vw;padding:70px 5vw 50px}.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--acid);font-size:12px;font-weight:1000;letter-spacing:.18em}.dot{width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 18px var(--acid)}
+h1,h2,h3{margin:0;line-height:.95}h1{font-size:clamp(62px,8.2vw,132px);letter-spacing:-.07em;margin:18px 0 26px;max-width:850px}h1 .outline{color:transparent;-webkit-text-stroke:1.2px #f5f5f0}.hero p{color:#c0c0ba;max-width:650px;font-size:18px;line-height:1.65;margin:0}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0}.trust{display:flex;gap:18px;flex-wrap:wrap;color:#90908b;font-size:12px;font-weight:800}
+.visual{position:relative;min-height:600px;display:grid;place-items:center}.card-stack{position:relative;width:min(520px,90%);height:520px}.poster{position:absolute;inset:0;border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.015)),#141414;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);overflow:hidden}.poster::after{content:"";position:absolute;inset:auto -18% -30% -18%;height:68%;background:radial-gradient(circle,color-mix(in srgb,var(--acid) 40%,transparent),transparent 58%)}.shoe-wrap{position:absolute;inset:0;display:grid;place-items:center;padding:54px}.shoe-wrap img{width:100%;max-width:410px;filter:drop-shadow(0 30px 24px rgba(0,0,0,.55));transform:rotate(-11deg)}.poster-badge{position:absolute;top:28px;left:28px;background:var(--acid);color:#0a0a0a;border-radius:999px;padding:10px 13px;font-size:11px;font-weight:1000;letter-spacing:.12em}.poster-price{position:absolute;bottom:28px;left:28px;font-weight:1000;font-size:34px;letter-spacing:-.04em}.poster-sub{position:absolute;bottom:30px;right:28px;text-align:right;color:#b7b7b2;font-size:11px;font-weight:800}.mini-card{position:absolute;right:-26px;bottom:38px;width:185px;padding:16px;background:#f4f4ee;color:#0d0d0d;border-radius:20px;box-shadow:var(--shadow);transform:rotate(5deg)}.mini-card strong{display:block;font-size:15px}.mini-card span{display:block;color:#4f4f4a;font-size:11px;margin-top:5px}
+.section{padding:92px 5vw}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}.section-head h2{font-size:clamp(42px,5vw,76px);letter-spacing:-.055em;margin-top:10px}.section-head p{max-width:520px;color:#92928d;line-height:1.6}.filters{display:grid;grid-template-columns:1fr 220px;gap:12px;margin-bottom:24px}.field{background:#101010;border:1px solid var(--line);color:#fff;border-radius:14px;padding:14px 15px;outline:none;width:100%}.field:focus{border-color:#62625f}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.product{background:linear-gradient(180deg,#131313,#0e0e0e);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:.25s;cursor:pointer}.product:hover{transform:translateY(-6px);border-color:#474744;box-shadow:0 22px 52px rgba(0,0,0,.3)}.product-media{aspect-ratio:1.15/1;display:grid;place-items:center;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent),radial-gradient(circle at 50% 70%,color-mix(in srgb,var(--acid) 14%,transparent),transparent 45%),#171717;position:relative;overflow:hidden}.product-media img{width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 22px 18px rgba(0,0,0,.55));transition:.3s}.product:hover .product-media img{transform:scale(1.045) rotate(-2deg)}.badge{position:absolute;top:16px;left:16px;background:var(--acid);color:#0b0b0b;border-radius:999px;padding:8px 10px;font-size:10px;font-weight:1000;letter-spacing:.1em}.sold{background:#fff;color:#111}.product-body{padding:19px}.meta-top{display:flex;justify-content:space-between;gap:14px;align-items:start}.product h3{font-size:21px;line-height:1.1;letter-spacing:-.025em}.price{font-size:18px;font-weight:1000;white-space:nowrap}.subline{color:#7f7f7a;font-size:12px;margin:8px 0 15px}.sizes{display:flex;gap:6px;flex-wrap:wrap}.size{min-width:36px;padding:7px 8px;border-radius:10px;text-align:center;background:#1b1b1b;border:1px solid #333;color:#d9d9d4;font-size:11px;font-weight:900}
+.features{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}.feature-main{min-height:430px;border-radius:28px;padding:42px;background:radial-gradient(circle at 80% 20%,color-mix(in srgb,var(--acid) 18%,transparent),transparent 25%),#111;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:end}.feature-main h2{font-size:clamp(44px,5.4vw,82px);letter-spacing:-.06em;max-width:700px}.feature-main p{color:#aaa;max-width:630px;line-height:1.7}.feature-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}.feature-card{min-height:205px;border:1px solid var(--line);border-radius:24px;padding:26px;background:#101010}.feature-card .num{color:var(--acid);font-size:12px;font-weight:1000}.feature-card h3{font-size:24px;margin:42px 0 8px}.feature-card p{color:#888883;line-height:1.55;font-size:14px}
+.cta{margin:0 5vw 90px;border-radius:34px;padding:56px;background:var(--acid);color:#0a0a0a;display:flex;align-items:center;justify-content:space-between;gap:30px}.cta h2{font-size:clamp(44px,6vw,88px);letter-spacing:-.06em;max-width:760px}.cta .btn{border-color:#0a0a0a}footer{display:flex;justify-content:space-between;gap:28px;align-items:center;border-top:1px solid var(--line);padding:32px 5vw 46px;color:#777772;font-size:12px}footer strong{color:#fff}
+.modal{position:fixed;inset:0;display:none;place-items:center;padding:22px;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);z-index:100}.modal.open{display:grid}.modal-card{width:min(980px,100%);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;background:#101010;border:1px solid #2d2d2d;border-radius:28px;box-shadow:var(--shadow);position:relative}.modal-media{min-height:520px;background:radial-gradient(circle at 50% 75%,color-mix(in srgb,var(--acid) 17%,transparent),transparent 42%),#171717;display:grid;place-items:center;padding:40px}.modal-media img{width:92%;max-height:420px;object-fit:contain;filter:drop-shadow(0 25px 20px rgba(0,0,0,.55))}.modal-content{padding:38px;display:flex;flex-direction:column;gap:17px}.modal-content h3{font-size:38px;letter-spacing:-.04em}.modal-content p{color:#9f9f99;line-height:1.6;margin:0}.close{position:absolute;right:14px;top:14px;width:42px;height:42px;border-radius:50%;border:1px solid #333;background:#0c0c0c;color:#fff;font-size:23px;cursor:pointer;z-index:2}.modal .btn{width:100%;margin-top:auto}.empty,.loading{padding:55px;text-align:center;color:#777}
+@media(max-width:980px){nav{display:none}.hero{grid-template-columns:1fr}.visual{min-height:520px}.grid{grid-template-columns:1fr 1fr}.features{grid-template-columns:1fr}}
+@media(max-width:650px){header{padding:13px 18px}.header-cta .ghost{display:none}.hero,.section{padding-left:18px;padding-right:18px}.hero{padding-top:46px;min-height:auto}.hero p{font-size:16px}.visual{min-height:420px}.card-stack{height:390px;width:100%}.mini-card{right:0;bottom:8px}.poster-price{font-size:28px}.section{padding-top:72px;padding-bottom:72px}.section-head{align-items:start;flex-direction:column}.filters{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.feature-cards{grid-template-columns:1fr}.feature-main{padding:28px}.cta{margin:0 18px 70px;padding:34px 26px;align-items:flex-start;flex-direction:column}footer{padding-left:18px;padding-right:18px;align-items:flex-start;flex-direction:column}.modal-card{grid-template-columns:1fr}.modal-media{min-height:320px}.modal-content{padding:28px}}
+</style>
+</head>
+<body>
+<div class="announcement" id="announcement">LOADING STORE…</div>
+<header>
+  <a class="brand" href="#">
+    <div class="logo" id="logoLetter">K</div>
+    <div class="brand-copy"><strong id="storeName">Kelvo The Plug</strong><span id="locationHeader">SNEAKERS / TAMPA</span></div>
+  </a>
+  <nav><a href="#shop">Shop</a><a href="#why">Why Kelvo</a><a href="#contact">Contact</a></nav>
+  <div class="header-cta"><a class="btn ghost" href="#shop">Browse</a><a class="btn acid contact-link" href="#">DM to Buy</a></div>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span><span id="heroEyebrow">TAMPA'S SNEAKER CONNECT</span></div>
+    <h1><span id="heroLine1">HEAT ON YOUR FEET.</span><br><span class="outline" id="heroLine2">NO GUESSWORK.</span></h1>
+    <p id="heroDescription"></p>
+    <div class="hero-actions"><a class="btn acid" href="#shop" id="primaryButton">SHOP THE DROP →</a><a class="btn dark contact-link" href="#" id="contactButton">MESSAGE KELVO</a></div>
+    <div class="trust"><span>✓ <b id="trust1"></b></span><span>✓ <b id="trust2"></b></span><span>✓ <b id="trust3"></b></span></div>
+  </div>
+  <div class="visual"><div class="card-stack"><div class="poster">
+    <div class="poster-badge" id="featuredBadge">FEATURED DROP</div>
+    <div class="shoe-wrap"><img id="featuredImage" src="/media/jordan-4-demo.svg" alt="Featured sneaker"></div>
+    <div class="poster-price" id="featuredPrice">$240</div><div class="poster-sub" id="featuredSub">SIZE 8–11<br>AVAILABLE</div>
+  </div><div class="mini-card"><strong>Fresh inventory</strong><span>Updated from the store dashboard.</span></div></div></div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head"><div><div class="eyebrow"><span class="dot"></span> LIVE INVENTORY</div><h2 id="inventoryTitle">AVAILABLE NOW</h2></div><p id="inventoryDescription"></p></div>
+  <div class="filters"><input class="field" id="search" type="search" placeholder="Search by shoe or brand..."><select class="field" id="brandFilter"><option value="">All brands</option></select></div>
+  <div id="productGrid" class="grid"><div class="loading">Loading inventory…</div></div><div id="emptyState" class="empty" hidden>No sneakers match that search.</div>
+</section>
+
+<section class="section" id="why">
+  <div class="features">
+    <div class="feature-main"><div class="eyebrow"><span class="dot"></span> WHY KELVO</div><h2 id="whyTitle"></h2><p id="whyDescription"></p></div>
+    <div class="feature-cards">
+      <div class="feature-card"><div class="num">01</div><h3>Real sizes</h3><p>Customers see exactly what is available instead of guessing.</p></div>
+      <div class="feature-card"><div class="num">02</div><h3>Fast contact</h3><p>Send customers straight to the right contact or checkout link.</p></div>
+      <div class="feature-card"><div class="num">03</div><h3>Local pickup</h3><p>Coordinate Tampa pickup without publishing a private home address.</p></div>
+      <div class="feature-card"><div class="num">04</div><h3>Easy updates</h3><p>Add shoes, photos, sizes, and prices from a CMS — no HTML editing.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact"><div><div id="ctaEyebrow" style="font-size:12px;font-weight:1000;letter-spacing:.16em;margin-bottom:12px;"></div><h2 id="ctaTitle"></h2></div><a class="btn dark contact-link" href="#">MESSAGE TO BUY →</a></section>
+</main>
+<footer><div><strong id="footerStore">KELVO THE PLUG</strong><br><span id="footerText"></span></div><div>© 2026 <span id="footerStore2">Kelvo The Plug</span></div></footer>
+
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><button class="close" id="close">×</button><div class="modal-media"><img id="modalImage" alt=""></div><div class="modal-content"><div class="eyebrow"><span class="dot"></span><span id="modalBadge">AVAILABLE</span></div><h3 id="modalName"></h3><div class="price" id="modalPrice"></div><p id="modalCondition"></p><p id="modalDesc"></p><div><div style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#777;margin-bottom:9px;">AVAILABLE SIZES</div><div class="sizes" id="modalSizes"></div></div><a class="btn acid" id="modalBuy" href="#" target="_blank" rel="noreferrer">MESSAGE TO BUY</a></div></div></div>
+
+<script>
+let SITE={}, PRODUCTS=[];
+const $=id=>document.getElementById(id);
+const money=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)||0);
+function contactUrl(){
+  return SITE.instagramUrl || SITE.whatsappUrl || (SITE.email ? `mailto:${SITE.email}` : '#');
+}
+function applySite(){
+  document.documentElement.style.setProperty('--acid', SITE.accentColor || '#d8ff3e');
+  document.documentElement.style.setProperty('--bg', SITE.backgroundColor || '#070707');
+  $('announcement').textContent=SITE.announcement||'';
+  $('storeName').textContent=SITE.storeName||'Kelvo The Plug';
+  $('logoLetter').textContent=SITE.logoLetter||'K';
+  $('locationHeader').textContent=`SNEAKERS / ${(SITE.location||'Tampa').toUpperCase()}`;
+  $('heroEyebrow').textContent=SITE.heroEyebrow||'';
+  $('heroLine1').textContent=SITE.heroLine1||'';
+  $('heroLine2').textContent=SITE.heroLine2||'';
+  $('heroDescription').textContent=SITE.heroDescription||'';
+  $('primaryButton').textContent=SITE.primaryButtonText||'SHOP THE DROP →';
+  $('contactButton').textContent=SITE.contactButtonText||'MESSAGE KELVO';
+  $('trust1').textContent=SITE.trustItem1||'';
+  $('trust2').textContent=SITE.trustItem2||'';
+  $('trust3').textContent=SITE.trustItem3||'';
+  $('inventoryTitle').textContent=SITE.inventoryTitle||'AVAILABLE NOW';
+  $('inventoryDescription').textContent=SITE.inventoryDescription||'';
+  $('whyTitle').textContent=SITE.whyTitle||'';
+  $('whyDescription').textContent=SITE.whyDescription||'';
+  $('ctaEyebrow').textContent=SITE.ctaEyebrow||'';
+  $('ctaTitle').textContent=SITE.ctaTitle||'';
+  $('footerStore').textContent=(SITE.storeName||'Kelvo The Plug').toUpperCase();
+  $('footerStore2').textContent=SITE.storeName||'Kelvo The Plug';
+  $('footerText').textContent=SITE.footerText||SITE.location||'';
+  document.title=`${SITE.storeName||'Kelvo The Plug'} — Sneaker Shop`;
+  document.querySelectorAll('.contact-link').forEach(a=>{a.href=contactUrl(); a.target='_blank'; a.rel='noreferrer'});
+}
+function fillBrands(){
+  const select=$('brandFilter'); select.innerHTML='<option value="">All brands</option>';
+  [...new Set(PRODUCTS.map(p=>p.brand).filter(Boolean))].sort().forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;select.appendChild(o)});
+}
+function featured(){
+  const p=PRODUCTS.find(p=>!p.soldOut)||PRODUCTS[0]; if(!p)return;
+  $('featuredImage').src=p.image;$('featuredImage').alt=p.name;$('featuredBadge').textContent=p.badge||'FEATURED DROP';$('featuredPrice').textContent=money(p.price);
+  $('featuredSub').innerHTML=`${p.sizes?.length?`SIZE ${p.sizes[0]}–${p.sizes[p.sizes.length-1]}`:'SIZES VARY'}<br>${p.soldOut?'SOLD OUT':'AVAILABLE'}`;
+}
+function render(){
+  const q=$('search').value.trim().toLowerCase(), brand=$('brandFilter').value;
+  const list=PRODUCTS.filter(p=>(!brand||p.brand===brand)&&(!q||`${p.name} ${p.brand}`.toLowerCase().includes(q)));
+  const grid=$('productGrid');grid.innerHTML='';$('emptyState').hidden=list.length>0;
+  list.forEach(p=>{
+    const card=document.createElement('article');card.className='product';
+    card.innerHTML=`<div class="product-media"><span class="badge ${p.soldOut?'sold':''}">${p.soldOut?'SOLD OUT':(p.badge||'AVAILABLE')}</span><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div class="product-body"><div class="meta-top"><h3>${p.name}</h3><div class="price">${money(p.price)}</div></div><div class="subline">${p.brand||''}${p.condition?' · '+p.condition:''}</div><div class="sizes">${(p.sizes||[]).map(s=>`<span class="size">${s}</span>`).join('')}</div></div>`;
+    card.onclick=()=>openProduct(p);grid.appendChild(card);
+  });
+}
+function openProduct(p){
+  $('modalImage').src=p.image;$('modalName').textContent=p.name;$('modalPrice').textContent=money(p.price);$('modalDesc').textContent=p.description||'';$('modalCondition').textContent=p.condition||'';$('modalBadge').textContent=p.soldOut?'SOLD OUT':(p.badge||'AVAILABLE');$('modalSizes').innerHTML=(p.sizes||[]).map(s=>`<span class="size">${s}</span>`).join('');
+  const b=$('modalBuy');b.href=p.buyUrl||contactUrl();b.textContent=p.soldOut?'ASK ABOUT RESTOCK':(p.buyUrl?'BUY NOW':'MESSAGE TO BUY');
+  $('modal').classList.add('open');$('modal').setAttribute('aria-hidden','false');
+}
+function closeModal(){$('modal').classList.remove('open');$('modal').setAttribute('aria-hidden','true')}
+async function init(){
+  try{
+    const [s,p]=await Promise.all([fetch('/data/site.json',{cache:'no-store'}),fetch('/data/products.json',{cache:'no-store'})]);
+    SITE=await s.json();PRODUCTS=await p.json();applySite();fillBrands();featured();render();
+  }catch(e){
+    $('productGrid').innerHTML='<div class="empty">The store data could not load. Make sure the site is published through Netlify rather than opened directly from your computer.</div>';
+    console.error(e);
+  }
+}
+$('close').onclick=closeModal;$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});$('search').addEventListener('input',render);$('brandFilter').addEventListener('change',render);init();
+</script>
+</body>
+</html>
