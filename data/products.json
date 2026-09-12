@@ -1,0 +1,69 @@
+[
+  {
+    "name": "Jordan 4 Military Blue",
+    "brand": "Jordan",
+    "price": 240,
+    "sizes": [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "badge": "NEW DROP",
+    "condition": "New / Deadstock",
+    "description": "Demo product. Replace this with the exact condition, authenticity notes, and purchase instructions.",
+    "image": "/media/jordan-4-demo.svg",
+    "buyUrl": "",
+    "soldOut": false
+  },
+  {
+    "name": "Nike Dunk Low Panda",
+    "brand": "Nike",
+    "price": 150,
+    "sizes": [
+      "7",
+      "8",
+      "9.5",
+      "10"
+    ],
+    "badge": "AVAILABLE",
+    "condition": "New / Deadstock",
+    "description": "Demo product. Add the real photos and exact inventory before launch.",
+    "image": "/media/dunk-demo.svg",
+    "buyUrl": "",
+    "soldOut": false
+  },
+  {
+    "name": "Yeezy 350 V2",
+    "brand": "adidas",
+    "price": 225,
+    "sizes": [
+      "9",
+      "10",
+      "10.5"
+    ],
+    "badge": "LOW STOCK",
+    "condition": "New / Deadstock",
+    "description": "Demo product. Replace with the real colorway, condition, and photos.",
+    "image": "/media/yeezy-demo.svg",
+    "buyUrl": "",
+    "soldOut": false
+  },
+  {
+    "name": "Jordan 1 Lost & Found",
+    "brand": "Jordan",
+    "price": 290,
+    "sizes": [
+      "8.5",
+      "9",
+      "10",
+      "11"
+    ],
+    "badge": "FEATURED",
+    "condition": "New / Deadstock",
+    "description": "Demo product. Replace with the exact pair details before selling.",
+    "image": "/media/jordan-1-demo.svg",
+    "buyUrl": "",
+    "soldOut": false
+  }
+]
