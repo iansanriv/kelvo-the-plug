@@ -1,0 +1,5 @@
+const {db,json,body,adminOK}=require('./_utils');
+exports.handler=async(event)=>{
+ if(event.httpMethod!=='POST')return json(405,{error:'Method not allowed'});if(!adminOK(event))return json(401,{error:'Invalid admin key.'});const req=body(event);if(!req?.dataBase64||!req?.contentType)return json(400,{error:'Image data is missing.'});
+ try{const s=db();const ext=(req.filename||'image.jpg').split('.').pop().replace(/[^a-z0-9]/gi,'').toLowerCase()||'jpg';const name=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const buffer=Buffer.from(req.dataBase64,'base64');if(buffer.length>4*1024*1024)return json(413,{error:'Image is too large. Keep it under 4 MB.'});const {error}=await s.storage.from('product-images').upload(name,buffer,{contentType:req.contentType,upsert:false,cacheControl:'31536000'});if(error)throw error;const {data}=s.storage.from('product-images').getPublicUrl(name);return json(200,{url:data.publicUrl})}catch(e){console.error(e);return json(500,{error:e.message||'Upload failed.'})}
+};
