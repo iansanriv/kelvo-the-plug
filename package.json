@@ -1,0 +1,9 @@
+{
+  "name": "kelvo-the-plug-store",
+  "version": "4.0.0",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "stripe": "^18.5.0"
+  }
+}
