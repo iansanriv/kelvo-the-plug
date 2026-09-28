@@ -16,8 +16,8 @@ exports.handler=async(event)=>{
     const {data:o,error:oe}=await s.from('orders').insert({status:'pending',amount_total:subtotal,fulfillment_method:fulfillment,reserved:false}).select('id').single();if(oe)throw oe;orderId=o.id;
     const {error:ie}=await s.from('order_items').insert(orderItems.map(i=>({...i,order_id:orderId})));if(ie)throw ie;
     const {error:re}=await s.rpc('reserve_order',{p_order_id:orderId});if(re){await s.from('orders').update({status:'failed'}).eq('id',orderId);return json(409,{error:'One of those sizes just sold out. Refresh and try again.'})} reserved=true;
-    const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'');
-    const site=(process.env.URL||'').replace(/\/$/,''); if(!site)throw new Error('Netlify URL unavailable');
+    const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'',{httpClient:Stripe.createFetchHttpClient()});
+    const site=(process.env.SITE_URL||process.env.URL||(event.rawUrl?new URL(event.rawUrl).origin:'')).replace(/\/$/,''); if(!site)throw new Error('Store URL unavailable');
     const params={mode:'payment',line_items:vars.map(v=>({quantity:requested.get(v.id),price_data:{currency:'usd',unit_amount:v.price_cents,product_data:{name:`${v.products.name} — Size ${v.size}`,description:v.products.brand||undefined}}})),client_reference_id:orderId,metadata:{order_id:orderId,fulfillment_method:fulfillment},success_url:`${site}/?success=1&session_id={CHECKOUT_SESSION_ID}`,cancel_url:`${site}/?canceled=1`,expires_at:Math.floor(Date.now()/1000)+1800,phone_number_collection:{enabled:true},allow_promotion_codes:true};
     if (fulfillment === 'shipping') {
 
@@ -75,5 +75,5 @@ exports.handler=async(event)=>{
     const session=await stripe.checkout.sessions.create(params); stripeSessionId=session.id;
     const {error:ue}=await s.from('orders').update({stripe_session_id:session.id}).eq('id',orderId);if(ue)throw ue;
     return json(200,{url:session.url});
-  }catch(e){console.error(e);if(stripeSessionId){try{const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'');await stripe.checkout.sessions.expire(stripeSessionId)}catch{}}if(reserved&&orderId){try{await s.rpc('release_order',{p_order_id:orderId})}catch{}}return json(500,{error:'Checkout could not be started. Please try again.'})}
+  }catch(e){console.error(e);if(stripeSessionId){try{const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'',{httpClient:Stripe.createFetchHttpClient()});await stripe.checkout.sessions.expire(stripeSessionId)}catch{}}if(reserved&&orderId){try{await s.rpc('release_order',{p_order_id:orderId})}catch{}}return json(500,{error:'Checkout could not be started. Please try again.'})}
 };

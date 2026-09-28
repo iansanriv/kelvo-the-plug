@@ -2,8 +2,8 @@ const Stripe=require('stripe');
 const {db}=require('./_utils');
 exports.handler=async(event)=>{
   if(event.httpMethod!=='POST')return{statusCode:405,body:'Method not allowed'};
-  const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'');const sig=event.headers['stripe-signature'];const raw=event.isBase64Encoded?Buffer.from(event.body,'base64'):event.body;let ev;
-  try{ev=stripe.webhooks.constructEvent(raw,sig,process.env.STRIPE_WEBHOOK_SECRET||'')}catch(e){return{statusCode:400,body:`Webhook Error: ${e.message}`}}
+  const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||'',{httpClient:Stripe.createFetchHttpClient()});const sig=event.headers['stripe-signature'];const raw=event.isBase64Encoded?Buffer.from(event.body,'base64'):event.body;let ev;
+  try{ev=await stripe.webhooks.constructEventAsync(raw,sig,process.env.STRIPE_WEBHOOK_SECRET||'')}catch(e){return{statusCode:400,body:`Webhook Error: ${e.message}`}}
   const s=db();const session=ev.data.object;const orderId=session.metadata?.order_id||session.client_reference_id;if(!orderId)return{statusCode:200,body:'ok'};
   try{
     if(ev.type==='checkout.session.completed'||ev.type==='checkout.session.async_payment_succeeded'){
