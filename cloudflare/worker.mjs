@@ -1,6 +1,7 @@
 import products from '../netlify/functions/products.js';
 import adminProducts from '../netlify/functions/admin-products.js';
 import adminOrders from '../netlify/functions/admin-orders.js';
+import adminShipping from '../netlify/functions/admin-shipping.js';
 import adminUpload from '../netlify/functions/admin-upload.js';
 import checkout from '../netlify/functions/create-checkout-session.js';
 import webhook from '../netlify/functions/stripe-webhook.js';
@@ -14,6 +15,7 @@ export default createWorker({
   products: products.handler,
   'admin-products': adminProducts.handler,
   'admin-orders': adminOrders.handler,
+  'admin-shipping': adminShipping.handler,
   'admin-upload': adminUpload.handler,
   'create-checkout-session': checkout.handler,
   'stripe-webhook': webhook.handler,

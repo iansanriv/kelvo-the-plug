@@ -19,7 +19,7 @@ const mf = new Miniflare(convertV4MiniflareOptions({ workers: [{
   }
 }] }));
 try {
-  for (const path of ['admin-products', 'admin-orders', 'admin-upload']) {
+  for (const path of ['admin-products', 'admin-orders', 'admin-upload', 'admin-shipping']) {
     const response = await mf.dispatchFetch(`https://store.example/api/${path}`, {
       method: path === 'admin-upload' ? 'POST' : 'GET',
       headers: { 'x-admin-key': 'incorrect' }

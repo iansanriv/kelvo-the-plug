@@ -76,9 +76,7 @@ exports.handler = async (event) => {
     const updates = {
       tracking_number: trackingNumber || null,
       shipping_carrier: carrier || null,
-      shipped_at: shipped
-        ? new Date().toISOString()
-        : null
+      ...(shipped ? { shipped_at: new Date().toISOString() } : {})
     };
 
     const { data, error } = await s
