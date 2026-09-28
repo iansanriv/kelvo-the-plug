@@ -70,3 +70,10 @@ test('a transaction for another order or mode cannot be attached',async()=>{
 test('test carrier rates are never offered with a live key',()=>{
   assert.deepEqual(S.rateList({rates:[{object_id:'1',currency:'USD',amount:'9',test:true}]},'tag',false),[]);
 });
+test('practice orders require test mode even if marked paid, and ordinary unpaid orders remain blocked',()=>{
+  const practice={...order,status:'pending',shipping_address:{...order.shipping_address,test_only:true}};
+  assert.doesNotThrow(()=>S.eligible(practice,true));
+  assert.throws(()=>S.eligible(practice,false),/test-only/);
+  assert.throws(()=>S.eligible({...practice,status:'paid'},false),/test-only/);
+  assert.throws(()=>S.eligible({...order,status:'pending'},true),/Only paid/);
+});

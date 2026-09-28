@@ -88,9 +88,14 @@ loadOrders = async function () {
     banner.textContent=config.error?config.error:!config.configured?'Shippo setup: add SHIPPO_API_TOKEN as a Cloudflare runtime secret.':`${config.test?'Shippo TEST mode':'Shippo LIVE mode'} · ${config.used}/30 live labels used or reserved this UTC month. This cap counts this store only; purchases elsewhere in Shippo also count toward your account allowance. Postage is always paid.`;
     b.append(banner);
     for(const o of orders){
+      const testOnly=o.shipping_address?.test_only===true;
       const e=document.createElement('div');e.className='order';
       e.innerHTML=`<div class="orderTop"><div><strong>Order ${esc(o.id.slice(0,8))}</strong><br><small>${esc(new Date(o.created_at).toLocaleString())} · ${esc(o.fulfillment_method)}</small></div><div><span class="status ${o.status==='paid'?'paid':''}">${esc(o.status)}</span><p>${money(o.amount_total)}</p>${o.shipped_at?'<strong>✓ SHIPPED</strong>':''}</div></div><pre style="white-space:pre-wrap;font:inherit;font-size:13px">${esc(shippingText(o))}</pre><div class="orderItems">${(o.order_items||[]).map(i=>`<p>${esc(i.quantity)} × ${esc(i.product_name)} — Size ${esc(i.size)} · ${money(i.unit_price_cents)}</p>`).join('')}</div>`;
-      if(o.status==='paid'&&o.fulfillment_method==='shipping'){
+      if(testOnly){
+        e.querySelector('.status').textContent='TEST ORDER — NO PAYMENT';
+        const info=document.createElement('p');info.className='notice';info.textContent='Shipping practice only. No payment or inventory changes. Real postage is blocked for this order.';e.append(info);
+      }
+      if((o.status==='paid'||(testOnly&&config.test))&&o.fulfillment_method==='shipping'){
         const controls=document.createElement('div');controls.style.cssText='display:flex;flex-wrap:wrap;gap:8px;margin:16px 0';e.append(controls);
         const labels=(config.labels||[]).filter(l=>l.order_id===o.id&&l.test===config.test);
         const current=labels.find(l=>['success','purchasing','pending','unknown'].includes(l.status));
@@ -105,6 +110,7 @@ loadOrders = async function () {
           const button=shipButton(controls,config.test?'CREATE TEST LABEL':'CREATE SHIPPING LABEL',()=>openShippo(o),true);
           if(!config.test&&config.used>=30){button.disabled=true;button.textContent='30-LABEL CAP REACHED';}
         }
+        if(!testOnly){
         shipButton(controls,'COPY ADDRESS',async()=>{await navigator.clipboard.writeText(shippingText(o));pop('Shipping info copied');});
         shipLink(controls,'OPEN PIRATE SHIP ↗','https://ship.pirateship.com/');
         const fields=shipFields(e,[['shipping_carrier','CARRIER'],['tracking_number','TRACKING NUMBER']],o);
@@ -112,6 +118,7 @@ loadOrders = async function () {
         const save=async shipped=>{const values=fieldValues(fields);if(shipped&&!values.tracking_number)throw Error('Enter a tracking number first.');await api('/.netlify/functions/admin-orders',{method:'PUT',body:JSON.stringify({id:o.id,...values,shipped})});await loadOrders();};
         shipButton(updates,'SAVE TRACKING',()=>save(false));
         if(!o.shipped_at)shipButton(updates,'MARK SHIPPED',()=>save(true),true);
+        }
       }
       b.append(e);
     }

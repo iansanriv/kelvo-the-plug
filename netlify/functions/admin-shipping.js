@@ -16,7 +16,7 @@ function createHandler({getStore = S.store, request = S.shippoRequest, getToken 
       const req = body(event);
       if (!req || !['rates','buy','sync'].includes(req.action)) S.fail('Invalid shipping request.');
       if (req.action === 'rates') {
-        const order = await db.order(req.order_id); S.eligible(order);
+        const order = await db.order(req.order_id); S.eligible(order, test);
         if (!test && await db.usage() >= 30) S.fail('30-label store cap reached. Use Pirate Ship for additional labels.',409);
         const from = S.address(req.from,'Return address'), to = S.recipient(order), box = S.parcel(req.parcel);
         const shipment = await request(token,'shipments/',{address_from:from,address_to:to,parcels:[box],async:false});

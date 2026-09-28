@@ -35,9 +35,11 @@ function parcel(input) {
   }
   return p;
 }
-function eligible(o) {
+function eligible(o, test = false) {
   if (!o) fail('Order not found.', 404);
-  if (o.status !== 'paid' || o.fulfillment_method !== 'shipping') fail('Only paid delivery orders can receive a label.', 409);
+  const fixture = o.shipping_address?.test_only === true;
+  if (fixture && !test) fail('This is a test-only order. Use a Shippo test key; real postage is blocked.', 409);
+  if ((o.status !== 'paid' && !(fixture && test)) || o.fulfillment_method !== 'shipping') fail('Only paid delivery orders can receive a label.', 409);
   if (o.shipped_at || o.tracking_number) fail('This order already has tracking or is shipped.', 409);
 }
 function safeURL(value) {
